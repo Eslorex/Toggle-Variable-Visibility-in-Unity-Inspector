@@ -1,4 +1,4 @@
-# Toggle Variable Visibility for ANY script
+# Toggle Variable Visibility for ANY script in Inspector
 
 - Toggles Variables Visibility in Unity Inspector and works for ANY script in Unity. 
 
