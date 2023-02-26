@@ -1,6 +1,6 @@
 # ToggleVariableVisibility for ANY script
 
-- Toggles Variables Visibility in Unity Inspector and works for ANY script. 
+- Toggles Variables Visibility in Unity Inspector and works for ANY script in Unity. 
 
 - Import the files
 - Define a public bool showVariable to toggle visibility of the variables that has the [HideInInspector] attribute. Basically just put [HideInInspector] attribute before the variable if you want to toggle its visibility.
