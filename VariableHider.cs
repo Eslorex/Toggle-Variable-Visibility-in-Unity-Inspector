@@ -8,10 +8,10 @@ public class VariableHider : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-
+ 
         var targetType = target.GetType();
 
-        var fields = targetType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        var fields = targetType.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
         foreach (var field in fields)
         {
@@ -19,17 +19,23 @@ public class VariableHider : Editor
 
             if (hideInInspector.Length > 0)
             {
-                var showVariableProp = serializedObject.FindProperty("showVariable");
-                if (showVariableProp == null) continue;
+                var showVariableField = targetType.GetField("showVariable", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
-                bool showVariable = showVariableProp.boolValue;
-
-                if (!showVariable)
+                if (showVariableField != null)
+                {
+                    bool showVariable = (bool)showVariableField.GetValue(target);
+                    
+                    if (!showVariable)
+                    {
+                        continue;
+                    }
+                }
+                else
                 {
                     continue;
                 }
             }
-
+            
             EditorGUILayout.PropertyField(serializedObject.FindProperty(field.Name), true);
         }
 
